@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox as msg
 from tkinter.constants import NSEW, SUNKEN
+import math
 
 
 class App(tk.Tk):
@@ -80,9 +81,29 @@ class App(tk.Tk):
             self.entry_c.focus_set()
             return
 
-        d = a+b+c
-        s = '%.2f' % d
-        self.lbl_ketqua.configure(text=s)
+        if a == 0:
+            if b == 0:
+                if c == 0:
+                    self.lbl_ketqua.configure(text='Phuong trinh vo so nghiem')
+                else:
+                    self.lbl_ketqua.configure(text='Phuong trinh vo nghiem')
+            else:
+                ketqua = -c/b
+                self.lbl_ketqua.configure(
+                    text='Phuong trinh co nghiem x = %.2f' % ketqua)
+        else:
+            delta = b**2 - 4*a*c
+            if delta == 0:
+                ketqua = -b/(2*a)
+                self.lbl_ketqua.configure(
+                    text='Phuong trinh co nghiem duy nhat x = %.2f' % ketqua)
+            if delta < 0:
+                self.lbl_ketqua.configure(text='Phuong trinh vo nghiem')
+            if delta > 0:
+                ketqua1 = (-b + math.sqrt(delta))/(2*a)
+                ketqua2 = (-b - math.sqrt(delta))/(2*a)
+                self.lbl_ketqua.configure(
+                    text='x1 = %.2f;  x2 = %.2f' % (ketqua1, ketqua2))
 
     def btn_xoa_click(self):
         self.entry_a.delete(0, tk.END)
