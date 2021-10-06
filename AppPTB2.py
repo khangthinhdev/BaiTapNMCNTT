@@ -21,10 +21,10 @@ class App(tk.Tk):
         self.c = tk.StringVar()
 
         # input
-        entry_a = tk.Entry(self, justify=tk.RIGHT, textvariable=self.a)
-        entry_a.focus_set()
-        entry_b = tk.Entry(self, justify=tk.RIGHT, textvariable=self.b)
-        entry_c = tk.Entry(self, justify=tk.RIGHT, textvariable=self.c)
+        self.entry_a = tk.Entry(self, justify=tk.RIGHT, textvariable=self.a)
+        self.entry_a.focus_set()
+        self.entry_b = tk.Entry(self, justify=tk.RIGHT, textvariable=self.b)
+        self.entry_c = tk.Entry(self, justify=tk.RIGHT, textvariable=self.c)
 
         # button
         btn_giai = tk.Button(self, text="Giai", width=6,
@@ -38,11 +38,11 @@ class App(tk.Tk):
         lbl_c.grid(row=2, column=0, padx=10, pady=10)
         lbl_nghiem.grid(row=3, column=0, padx=10, pady=10)
         self.lbl_ketqua.grid(row=3, column=1, columnspan=2,
-                             padx=10, pady=10, sticky=NSEW)
+                             padx=10, pady=10, sticky=NSEW, ipady=2)
 
-        entry_a.grid(row=0, column=1, padx=10, pady=10)
-        entry_b.grid(row=1, column=1, padx=10, pady=10)
-        entry_c.grid(row=2, column=1, padx=10, pady=10)
+        self.entry_a.grid(row=0, column=1, padx=10, pady=10, ipady=2)
+        self.entry_b.grid(row=1, column=1, padx=10, pady=10, ipady=2)
+        self.entry_c.grid(row=2, column=1, padx=10, pady=10, ipady=2)
 
         btn_giai.grid(row=0, column=2, padx=10, pady=10)
         btn_xoa.grid(row=1, column=2, padx=10, pady=10)
@@ -50,9 +50,34 @@ class App(tk.Tk):
 
     # functions
     def btn_giai_click(self):
-        a = float(self.a.get())
-        b = float(self.b.get())
-        c = float(self.c.get())
+        def isFloat(value):
+            value_num = 0.0
+            try:
+                value_num = float(value)
+                return True, value_num
+            except ValueError:
+                return False, value_num
+
+        value_a = self.a.get()
+        value_b = self.b.get()
+        value_c = self.c.get()
+
+        result, a = isFloat(value_a)
+        if result == False:
+            msg.showerror('Error', 'Ban phai nhap chu so')
+            self.entry_a.focus_set()
+            return
+        result, b = isFloat(value_b)
+        if result == False:
+            msg.showerror('Error', 'Ban phai nhap chu so')
+            self.entry_b.focus_set()
+            return
+        result, c = isFloat(value_c)
+        if result == False:
+            msg.showerror('Error', 'Ban phai nhap chu so')
+            self.entry_c.focus_set()
+            return
+
         d = a+b+c
         s = '%.2f' % d
         self.lbl_ketqua.configure(text=s)
