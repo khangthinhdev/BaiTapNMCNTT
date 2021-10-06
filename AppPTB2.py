@@ -29,7 +29,8 @@ class App(tk.Tk):
         # button
         btn_giai = tk.Button(self, text="Giai", width=6,
                              command=self.btn_giai_click)
-        btn_xoa = tk.Button(self, text="Xoa", width=6)
+        btn_xoa = tk.Button(self, text="Xoa", width=6,
+                            command=self.btn_xoa_click)
         btn_thoat = tk.Button(self, text="Thoat", width=6)
 
         # grid
@@ -81,6 +82,13 @@ class App(tk.Tk):
         d = a+b+c
         s = '%.2f' % d
         self.lbl_ketqua.configure(text=s)
+
+    def btn_xoa_click(self):
+        self.entry_a.delete(0, tk.END)
+        self.entry_b.delete(0, tk.END)
+        self.entry_c.delete(0, tk.END)
+        self.lbl_ketqua.configure(text='')
+        self.entry_a.focus_set()
 
 
 if __name__ == "__main__":
