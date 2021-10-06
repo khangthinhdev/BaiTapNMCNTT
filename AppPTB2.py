@@ -31,7 +31,8 @@ class App(tk.Tk):
                              command=self.btn_giai_click)
         btn_xoa = tk.Button(self, text="Xoa", width=6,
                             command=self.btn_xoa_click)
-        btn_thoat = tk.Button(self, text="Thoat", width=6)
+        btn_thoat = tk.Button(self, text="Thoat", width=6,
+                              command=self.btn_thoat_click)
 
         # grid
         lbl_a.grid(row=0, column=0, padx=10, pady=10)
@@ -89,6 +90,11 @@ class App(tk.Tk):
         self.entry_c.delete(0, tk.END)
         self.lbl_ketqua.configure(text='')
         self.entry_a.focus_set()
+
+    def btn_thoat_click(self):
+        tra_loi = msg.askquestion('Question', 'Ban co muon thoat khong?')
+        if tra_loi == 'yes':
+            self.destroy()
 
 
 if __name__ == "__main__":
