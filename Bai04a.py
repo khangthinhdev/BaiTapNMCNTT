@@ -7,6 +7,7 @@ class App(Tk):
         super().__init__()
         self.title("Truot file text")
         self.geometry('480x560')
+        self.resizable(FALSE, FALSE)
         self.text = Text(self, font=('Times New Roman', 14),
                          width=50, wrap=WORD)
 
