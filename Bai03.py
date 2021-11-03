@@ -35,12 +35,13 @@ class App(tk.Tk):
         self.blue = tk.IntVar()
 
         # frame color
-        self.lfrm_color = tk.LabelFrame(self, text='Color')
-        self.chk_red = tk.Checkbutton(self.lfrm_color, text='Red', width=8, anchor=tk.W,
+        self.lfrm_color = tk.LabelFrame(
+            self, text='Color', width=200)
+        self.chk_red = tk.Checkbutton(self.lfrm_color, text='Red', width=8, height=1, anchor=tk.W,
                                       variable=self.red, command=self.xu_ly)
-        self.chk_green = tk.Checkbutton(self.lfrm_color, text='Green', width=8, anchor=tk.W,
+        self.chk_green = tk.Checkbutton(self.lfrm_color, text='Green', width=8, height=1, anchor=tk.W,
                                         variable=self.green, command=self.xu_ly)
-        self.chk_blue = tk.Checkbutton(self.lfrm_color, text='Blue', width=8, anchor=tk.W,
+        self.chk_blue = tk.Checkbutton(self.lfrm_color, text='Blue', width=8, height=1, anchor=tk.W,
                                        variable=self.blue, command=self.xu_ly)
         self.chk_red.select()
 
@@ -77,7 +78,7 @@ class App(tk.Tk):
         self.update_idletasks()
 
     def configure(self, event):
-        if ((event.width != self.width) or (event.height != self.height)) and event.width >= 445:
+        if ((event.width != self.width) or (event.height != self.height)):
 
             # xóa canvas cũ
             self.cvs_figure.delete("all")
@@ -88,7 +89,7 @@ class App(tk.Tk):
             self.lfrm_figure.place(x=self.winfo_width()-120, y=4)
             self.lfrm_color.place(x=self.winfo_width() -
                                   120, y=self.winfo_height()/2)
-            # vẽ lại các hình                      
+            # vẽ lại các hình
             color = '#'
             if self.red.get() == 1:
                 color = color + 'FF'
